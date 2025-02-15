@@ -2,6 +2,7 @@ class Solution {
 public:
        vector<int> dir={0,1,0,-1,0};
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+         ios_base::sync_with_stdio(false);
         int n=mat.size();
         int m = mat[0].size();
         queue<pair<int,int>>    q;
