@@ -1,17 +1,11 @@
 class Solution {
 private:
-    void bfs(int node,vector<vector<int>> &isConnected,vector<int> &vis){
-        queue<int> q;
-        q.push(node);
-        vis[0]=1;
-        while(!q.empty()){
-            node =q.front();
-            q.pop();
-            for(int i = 0;i < isConnected.size() ; i++){
-                if(isConnected[node][i] && !vis[i]){
-                    vis[i]=1;
-                    q.push(i);
-                }
+    void dfs(int node,vector<vector<int>> &isConnected,vector<int>&vis,vector<int> &ls){
+        if(vis[node])return;
+        vis[node]=1;
+        for(int j = 0 ; j < isConnected[node].size(); j++){
+            if(isConnected[node][j] && !vis[j]){
+                dfs(j,isConnected,vis,ls);
             }
         }
     }
@@ -20,10 +14,11 @@ public:
         int n = isConnected.size();
         int c =0;
         vector<int> vis(n,0);
+        vector<int> ls;
         for(int i= 0 ;i< n ; i++){
             if(!vis[i]){
                 c++;
-                bfs(i,isConnected,vis);
+                dfs(i,isConnected,vis,ls);
             }
         }
         return c;
