@@ -11,10 +11,6 @@ public:
                 break;
             }
         }
-        string result="";
-        for(int j = 0 ; j<=flag ; j++){
-            result+=num[j];
-        }
-        return result;
+        return (flag == -1) ? "" : num.substr(0, flag + 1);
     }
 };
