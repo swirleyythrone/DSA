@@ -15,7 +15,6 @@ public:
         for(int j = 0 ; j<=flag ; j++){
             result+=num[j];
         }
-        if(flag==-1)return "";
         return result;
     }
 };
