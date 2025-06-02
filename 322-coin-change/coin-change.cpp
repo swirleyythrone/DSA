@@ -1,6 +1,7 @@
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
+        ios_base::sync_with_stdio(false);
         int n=coins.size();
         vector<int> prev(amount+1,0),curr(amount+1,0);
         for(int T=0 ; T<=amount ; T++){
