@@ -23,6 +23,7 @@ public:
         return v;
     }
     int sumSubarrayMins(vector<int>& arr) {
+        ios_base::sync_with_stdio(false);
         vector<int> nse = Nse(arr);
         vector<int> pse = Pse(arr);
         long long total = 0 ;
