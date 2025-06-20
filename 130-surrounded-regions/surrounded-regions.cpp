@@ -1,45 +1,45 @@
 class Solution {
-private:
-    void dfs(int row, int col, vector<vector<char>>& board) {
+public:
+    void dfs(int r,int c,vector<vector<int>> &vis,vector<vector<char>>& board,int dr[],int dc[]){
+        vis[r][c]=1;
         int n = board.size();
         int m = board[0].size();
-        int delrow[4] = {-1, 0, 1, 0};
-        int delcol[4] = {0, 1, 0, -1};
-
-        board[row][col] = '#';  // Mark as safe
-
-        for (int i = 0; i < 4; i++) {
-            int nrow = row + delrow[i];
-            int ncol = col + delcol[i];
-
-            if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && board[nrow][ncol] == 'O') {
-                dfs(nrow, ncol, board);
+        for(int i = 0 ; i < 4 ; i++){
+            int nr = r + dr[i];
+            int nc = c + dc[i];
+            if(nr>=0 && nr<n && nc>=0 && nc<m && !vis[nr][nc] && board[nr][nc]=='O'){
+                dfs(nr,nc,vis,board,dr,dc);
             }
         }
+        
     }
-
-public:
     void solve(vector<vector<char>>& board) {
         int n = board.size();
         int m = board[0].size();
-
-        // Step 1: Mark boundary-connected 'O's as '#'
-        for (int j = 0; j < m; j++) {
-            if (board[0][j] == 'O') dfs(0, j, board);
-            if (board[n - 1][j] == 'O') dfs(n - 1, j, board);
+        int drow[] = {-1,0,1,0};
+        int dcol[] = {0,1,0,-1};
+        vector<vector<int>> vis(n,vector<int>(m,0));
+        for(int j = 0 ; j < m ; j++){
+            if(!vis[0][j] && board[0][j]=='O'){
+                dfs(0,j,vis,board,drow,dcol);
+            }
+            if(!vis[n-1][j] && board[n-1][j]=='O'){
+                dfs(n-1,j,vis,board,drow,dcol);
+            }
         }
-
-        for (int i = 0; i < n; i++) {
-            if (board[i][0] == 'O') dfs(i, 0, board);
-            if (board[i][m - 1] == 'O') dfs(i, m - 1, board);
+        for(int i = 0 ; i < n ; i++){
+            if(!vis[i][0] && board[i][0]=='O'){
+                dfs(i,0,vis,board,drow,dcol);
+            }
+            if(!vis[i][m-1] && board[i][m-1]=='O'){
+                dfs(i,m-1,vis,board,drow,dcol);
+            }
         }
-
-        // Step 2: Convert all remaining 'O's to 'X' (they are surrounded)
-        // Convert '#' back to 'O' (these are safe)
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (board[i][j] == 'O') board[i][j] = 'X';
-                if (board[i][j] == '#') board[i][j] = 'O';
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                if(!vis[i][j] && board[i][j]=='O'){
+                    board[i][j]='X';
+                }
             }
         }
     }
