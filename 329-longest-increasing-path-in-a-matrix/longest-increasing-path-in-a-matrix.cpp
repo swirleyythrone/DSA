@@ -1,11 +1,12 @@
 class Solution {
 public:
+    int dr[4] = {-1,0,+1,0};
+    int dc[4] = {0,+1,0,-1};
     int dfs(int r,int c,vector<vector<int>>& matrix,vector<vector<int>> &dp){
          if(dp[r][c]!=-1)return dp[r][c];
          int n = matrix.size();
          int m = matrix[0].size();
-         int dr[] = {-1,0,+1,0};
-         int dc[] = {0,+1,0,-1};
+         
          int maxi = 1;
          for(int i = 0 ; i < 4 ; i++){
             int nr = r + dr[i];
