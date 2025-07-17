@@ -23,6 +23,7 @@ public:
         }
     }
     vector<vector<string>> partition(string s) {
+        ios_base::sync_with_stdio(false);
         vector<vector<string>>ans;
         vector<string>path;
         f(0,s,path,ans);
